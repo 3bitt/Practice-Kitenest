@@ -26,6 +26,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Cities\Details.cshtml" />
+    <Content Remove="Views\Cities\Index.cshtml" />
+    <Content Remove="Views\Continents\Details.cshtml" />
+    <Content Remove="Views\Continents\Index.cshtml" />
+    <Content Remove="Views\Countries\Details.cshtml" />
+    <Content Remove="Views\Countries\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\css\custom\justified-nav.css" />
     <_ContentIncludedByDefault Remove="wwwroot\css\custom\search-searchForm.css" />
   </ItemGroup>

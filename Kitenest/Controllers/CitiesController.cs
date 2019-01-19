@@ -60,7 +60,7 @@ namespace Kitenest.Controllers
             {
                 _context.Add(city);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Admin", "Home");
             }
             return View(city);
         }
@@ -111,7 +111,7 @@ namespace Kitenest.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Admin", "Home");
             }
             return View(city);
         }
@@ -142,7 +142,7 @@ namespace Kitenest.Controllers
             var city = await _context.City.FindAsync(id);
             _context.City.Remove(city);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Admin", "Home");
         }
 
         private bool CityExists(int id)

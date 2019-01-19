@@ -61,7 +61,7 @@ namespace Kitenest.Controllers
             return View();
 
         }
-
+        [Route("admin")]
         public IActionResult Admin()
         {
             var continents = _context.Continent;
