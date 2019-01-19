@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Kitenest.Models.School>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Search Results";
+}
+<h1>Hi</h1>
+
+
+@{ if (!Model.Any())
+    {
+        <h2>not found</h2>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Mobile)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Continent)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Country)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.City)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SchoolTime.openHour)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SchoolTime.closeHour)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SchoolTime.workingFrom)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SchoolTime.workingTo)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Mobile)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Continent.name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Country.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.City.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SchoolTime.openHour)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SchoolTime.closeHour)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SchoolTime.workingFrom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SchoolTime.workingTo)
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    }
+}

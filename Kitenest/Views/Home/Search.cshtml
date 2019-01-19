@@ -1,0 +1,83 @@
+﻿
+@model Kitenest.Models.School
+@{
+    ViewData["Title"] = "Search";
+}
+<head>
+    <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="~/css/custom/search-searchForm.css" rel="stylesheet">
+</head>
+<h2>Search for kite schools</h2>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Customize your search</div>
+    <div class="panel-body">
+
+        <form asp-controller="Schools" asp-action="SearchSchools" method="GET">
+            <div class="col-md-6">
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="schoolName"><b>School name</b></span>
+                    <input type="text" class="form-control" name="schoolName" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="continent"><b>Continent</b></span>
+                    <input type="text" class="form-control" name="continent" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="country"><b>Country</b></span>
+                    <input type="text" class="form-control" name="country" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="city"><b>City</b></span>
+                    <input type="text" class="form-control" name="city" aria-describedby="basic-addon1">
+                </div>
+                <!--
+        <div class="row">
+            <div class="col-sm-2 col-md-6 ">
+                <div class="input-group">
+                    <span class="input-group-addon" id="status"><b>Status</b></span>
+                    <span class="input-group-addon radio-custom">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="defaultChecked" name="radioAll" checked>
+                            <label class="custom-control-label" for="defaultUnchecked">All</label>
+                        </div>
+                    </span>
+                    <span class="input-group-addon radio-custom">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="defaultUnchecked" name="radioOpen">
+                            <label class="custom-control-label" for="defaultChecked">Open</label>
+                        </div>
+                    </span>
+                    <span class="input-group-addon radio-custom">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="defaultUnchecked" name="radioClose">
+                            <label class="custom-control-label" for="defaultChecked">Closed</label>
+                        </div>
+                    </span>
+                </div><!-- /input-group
+    </div><!-- /.col-lg-6 -->
+
+
+            </div><!-- /.row -->
+            
+
+            <span id="helpBlock" class="help-block">During winter season school might be closed</span>
+            <span class="input-group-btn">
+                <button class="btn btn-default search-button" type="submit">
+                    <i class="glyphicon glyphicon-search"></i> Search
+                </button>
+            </span>
+
+</div>
+            </form>
+        </div>
+    </div>
+</div>
+</html>
+
+
+
