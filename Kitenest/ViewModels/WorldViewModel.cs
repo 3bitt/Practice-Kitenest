@@ -11,5 +11,6 @@ namespace Kitenest.ViewModels
         public IEnumerable<Continent> Continents { get; set; } 
         public IEnumerable<Country> Countries { get; set; }
         public IEnumerable<City> Cities { get; set; }
+        public IEnumerable<School> Schools { get; set; }
     }
 }

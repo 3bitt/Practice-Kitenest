@@ -25,28 +25,22 @@ namespace Kitenest.Models
         [ForeignKey("Continent_id")]
         public virtual Continent Continent { get; set; }
 
+                
+        public String Country { get; set; }
 
-        
-        public int Country_id { get; set; }
-
-        [ForeignKey("Country_id")]
-        [Display(Name = "Country")]
-        public virtual Country Country { get; set; }
 
         [Display(Name = "City")]
-        public int City_id { get; set; }
-
-        [ForeignKey("City_id")]
-        public virtual City City { get; set; }
+        public String City { get; set; }
 
 
-        [Display(Name = "Active Periods")]
-        public int School_Time_id { get; set; }
 
-        [ForeignKey("School_Time_id")]
-        public virtual SchoolTime SchoolTime { get; set; }
+        //[Display(Name = "Active Periods")]
+        //public int School_Time_id { get; set; }
 
-        public IEnumerable<School> getAll { get; set; }        
+        //[ForeignKey("School_Time_id")]
+        //public virtual SchoolTime SchoolTime { get; set; }
+
+        public IEnumerable<School> getSchools { get; set; }        
 
     }
 }

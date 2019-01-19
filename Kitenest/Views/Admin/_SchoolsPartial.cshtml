@@ -1,14 +1,6 @@
 ﻿@model IEnumerable<Kitenest.Models.School>
 
-@{
-    ViewData["Title"] = "Index";
-}
 
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -27,7 +19,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.City)
             </th>
-
             <th></th>
         </tr>
     </thead>
@@ -41,7 +32,7 @@
                 @Html.DisplayFor(modelItem => item.Mobile)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Continent.name)
+                @Html.DisplayFor(modelItem => item.Continent.id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Country)
@@ -49,7 +40,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.City)
             </td>
-      
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

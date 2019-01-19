@@ -1,7 +1,7 @@
 ﻿@model Kitenest.Models.School
 
 @{
-    ViewData["Title"] = "Create";
+    
 }
 
 <h2>Create</h2>
@@ -23,21 +23,36 @@
                 <span asp-validation-for="Mobile" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Continent_id" class="control-label"></label>
-                <select asp-for="Continent_id" class ="form-control" asp-items="ViewBag.Continent_id"></select>
+                @Html.Label("Continent")
+                @Html.DropDownList("Name", (SelectList) ViewBag.Continents)
             </div>
             <div class="form-group">
-                <label asp-for="Country_id" class="control-label"></label>
-                <select asp-for="Country_id" class ="form-control" asp-items="ViewBag.Country_id"></select>
+                <label asp-for="Country" class="control-label"></label>
+                <input asp-for="Country" class="form-control" />
+                <span asp-validation-for="Country" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="City_id" class="control-label"></label>
-                <select asp-for="City_id" class ="form-control" asp-items="ViewBag.City_id"></select>
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="School_Time_id" class="control-label"></label>
-                <select asp-for="School_Time_id" class ="form-control" asp-items="ViewBag.School_Time_id"></select>
-            </div>
+            @* <select asp-for="Continent_id" class="form-control" asp-items="ViewBag.Continent_id"></select>
+        </div>
+        <div class="form-group">
+            @Html.Label("Country")
+            @Html.DropDownList("Country", (SelectList)ViewData["Country"])
+        </div>
+        <div class="form-group">
+            @Html.Label("City")
+            @Html.DropDownList("Name", (SelectList)ViewData["City"])
+        </div>
+            *@
+            <!--
+    <div class="form-group">
+        <label asp-for="School_Time_id" class="control-label"></label>
+        <select asp-for="School_Time_id" class ="form-control" asp-items="ViewBag.School_Time_id"></select>
+    </div>
+        -->
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
@@ -46,6 +61,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Admin" asp-controller="Home">Back to Admin Panel</a>
 </div>
 

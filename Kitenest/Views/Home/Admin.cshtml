@@ -34,4 +34,14 @@
 
 
     </div>
+    <div class="row">
+        <div class="col-md-8">
+            <h3>Cities</h3>
+            <p>
+                <a asp-action="Create" asp-controller="Schools">Create New</a>
+            </p>
+            @Html.Partial("~/Views/Admin/_SchoolsPartial.cshtml", Model.Schools.ToList())
+
+        </div>
+    </div>
 </body>

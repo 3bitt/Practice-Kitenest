@@ -67,17 +67,14 @@ namespace Kitenest.Controllers
             var continents = _context.Continent;
             var countries = _context.Country;
             var cities = _context.City;
-
-            
-            ViewBag.continents = continents;
-            ViewBag.countries = countries;
-            ViewBag.cities = cities;
+            var schools = _context.School;
 
             
             WorldViewModel result = new WorldViewModel();
             result.Continents = continents;
             result.Countries = countries;
             result.Cities = cities;
+            result.Schools = schools;
 
             return View(result);
             
