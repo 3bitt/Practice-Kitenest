@@ -149,5 +149,13 @@ namespace Kitenest.Controllers
         {
             return _context.Continent.Any(e => e.id == id);
         }
+
+        
+        public async Task<ActionResult> getContinents()
+        {
+            var continents = _context.Continent.ToList();
+
+            return PartialView(continents);
+        }
     }
 }

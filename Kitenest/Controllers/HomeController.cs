@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Kitenest.Data;
+using Kitenest.ViewModels;
 
 namespace Kitenest.Controllers
 {
@@ -63,7 +64,23 @@ namespace Kitenest.Controllers
 
         public IActionResult Admin()
         {
-            return View();
+            var continents = _context.Continent;
+            var countries = _context.Country;
+            var cities = _context.City;
+
+            
+            ViewBag.continents = continents;
+            ViewBag.countries = countries;
+            ViewBag.cities = cities;
+
+            
+            WorldViewModel result = new WorldViewModel();
+            result.Continents = continents;
+            result.Countries = countries;
+            result.Cities = cities;
+
+            return View(result);
+            
         }
         //[HttpGet]
         //public IActionResult Search(String name) //String Continent, String Country, String City
