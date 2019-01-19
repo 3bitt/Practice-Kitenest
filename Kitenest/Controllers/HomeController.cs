@@ -60,6 +60,11 @@ namespace Kitenest.Controllers
             return View();
 
         }
+
+        public IActionResult Admin()
+        {
+            return View();
+        }
         //[HttpGet]
         //public IActionResult Search(String name) //String Continent, String Country, String City
         //{
