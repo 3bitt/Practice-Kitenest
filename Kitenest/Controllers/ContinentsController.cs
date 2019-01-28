@@ -34,7 +34,7 @@ namespace Kitenest.Controllers
             }
 
             var continent = await _context.Continent
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (continent == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace Kitenest.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,name")] Continent continent)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Continent continent)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace Kitenest.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,name")] Continent continent)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Continent continent)
         {
-            if (id != continent.id)
+            if (id != continent.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace Kitenest.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ContinentExists(continent.id))
+                    if (!ContinentExists(continent.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace Kitenest.Controllers
             }
 
             var continent = await _context.Continent
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (continent == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace Kitenest.Controllers
 
         private bool ContinentExists(int id)
         {
-            return _context.Continent.Any(e => e.id == id);
+            return _context.Continent.Any(e => e.Id == id);
         }
 
         

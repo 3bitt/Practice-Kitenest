@@ -7,6 +7,7 @@ namespace Kitenest.Data
 {
     public class KitenestDbContext : DbContext
     {
+        
         public KitenestDbContext(DbContextOptions<KitenestDbContext> options) : base(options) { }
 
 

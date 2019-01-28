@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Kitenest.Validators;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace Kitenest.Models
 {
+    
     public class School
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -25,22 +29,21 @@ namespace Kitenest.Models
         [ForeignKey("Continent_id")]
         public virtual Continent Continent { get; set; }
 
-                
-        public String Country { get; set; }
+        //[Required]
+        [CountryValidator]
+        [Display(Name = "Country")]
+        public string Country { get; set; }
 
-
+       
+        
         [Display(Name = "City")]
-        public String City { get; set; }
+        public int City_id { get; set; }
 
+        [ForeignKey("City_id")]
+        public virtual City City { get; set; }
 
-
-        //[Display(Name = "Active Periods")]
-        //public int School_Time_id { get; set; }
-
-        //[ForeignKey("School_Time_id")]
-        //public virtual SchoolTime SchoolTime { get; set; }
-
-        public IEnumerable<School> getSchools { get; set; }        
+       // public IEnumerable<School> getSchools { get; set; } 
+        
 
     }
 }

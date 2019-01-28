@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kitenest.Migrations
 {
     [DbContext(typeof(KitenestDbContext))]
-    [Migration("20190119111612_DBprob")]
-    partial class DBprob
+    [Migration("20190128193822_correctCountryFieldInSchooltoString")]
+    partial class correctCountryFieldInSchooltoString
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,30 +23,26 @@ namespace Kitenest.Migrations
 
             modelBuilder.Entity("Kitenest.Models.City", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CountryId");
-
                     b.Property<string>("Name");
 
-                    b.HasKey("id");
-
-                    b.HasIndex("CountryId");
+                    b.HasKey("Id");
 
                     b.ToTable("City");
                 });
 
             modelBuilder.Entity("Kitenest.Models.Continent", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("name");
+                    b.Property<string>("Name");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Continent");
                 });
@@ -57,13 +53,9 @@ namespace Kitenest.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("Continentid");
-
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Continentid");
 
                     b.ToTable("Country");
                 });
@@ -78,7 +70,7 @@ namespace Kitenest.Migrations
 
                     b.Property<int>("Continent_id");
 
-                    b.Property<int>("Country_id");
+                    b.Property<string>("Country");
 
                     b.Property<int>("Mobile");
 
@@ -86,28 +78,18 @@ namespace Kitenest.Migrations
                         .IsRequired()
                         .HasMaxLength(70);
 
-                    b.Property<int?>("SchoolId");
-
-                    b.Property<int>("School_Time_id");
-
                     b.HasKey("Id");
 
                     b.HasIndex("City_id");
 
                     b.HasIndex("Continent_id");
 
-                    b.HasIndex("Country_id");
-
-                    b.HasIndex("SchoolId");
-
-                    b.HasIndex("School_Time_id");
-
                     b.ToTable("School");
                 });
 
             modelBuilder.Entity("Kitenest.Models.SchoolTime", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -119,49 +101,21 @@ namespace Kitenest.Migrations
 
                     b.Property<DateTime>("workingTo");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("SchoolTime");
-                });
-
-            modelBuilder.Entity("Kitenest.Models.City", b =>
-                {
-                    b.HasOne("Kitenest.Models.Country", "Country")
-                        .WithMany("Cities")
-                        .HasForeignKey("CountryId");
-                });
-
-            modelBuilder.Entity("Kitenest.Models.Country", b =>
-                {
-                    b.HasOne("Kitenest.Models.Continent", "Continent")
-                        .WithMany("Countries")
-                        .HasForeignKey("Continentid");
                 });
 
             modelBuilder.Entity("Kitenest.Models.School", b =>
                 {
                     b.HasOne("Kitenest.Models.City", "City")
-                        .WithMany("Schools")
+                        .WithMany()
                         .HasForeignKey("City_id")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Kitenest.Models.Continent", "Continent")
-                        .WithMany("Schools")
-                        .HasForeignKey("Continent_id")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Kitenest.Models.Country", "Country")
-                        .WithMany("Schools")
-                        .HasForeignKey("Country_id")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Kitenest.Models.School")
-                        .WithMany("getAll")
-                        .HasForeignKey("SchoolId");
-
-                    b.HasOne("Kitenest.Models.SchoolTime", "SchoolTime")
                         .WithMany()
-                        .HasForeignKey("School_Time_id")
+                        .HasForeignKey("Continent_id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -26,7 +26,7 @@
             @Html.DisplayNameFor(model => model.Continent)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Continent.id)
+            @Html.DisplayFor(model => model.Continent.Name)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Country)
@@ -38,12 +38,12 @@
             @Html.DisplayNameFor(model => model.City)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.City)
+            @Html.DisplayFor(model => model.City.Name)
         </dd>
         
     </dl>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Admin" asp-controller="Home">Back to Admin Panel</a>
 </div>

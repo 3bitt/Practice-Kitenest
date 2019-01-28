@@ -7,11 +7,13 @@ namespace Kitenest.Models
 {
     public class Continent
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public virtual IEnumerable<School> Schools { get; set; }
-        public virtual IEnumerable<Country> Countries { get; set; }
-        public IEnumerable<Continent> getContinents { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        //public virtual IEnumerable<School> Schools { get; set; }
+        //public virtual IEnumerable<Country> Countries { get; set; }
+
+        //public IEnumerable<Continent> getContinents { get; set; }
         
     }
 }

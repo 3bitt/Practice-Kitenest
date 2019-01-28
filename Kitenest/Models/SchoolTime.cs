@@ -8,7 +8,7 @@ namespace Kitenest.Models
 {
     public class SchoolTime
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
         //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
 

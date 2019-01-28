@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Kitenest.Migrations
+namespace Kitenest.Data.Migrations
 {
-    public partial class DBprob : Migration
+    public partial class AddUsersAfterModelRestructure : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

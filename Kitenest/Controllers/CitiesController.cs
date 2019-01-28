@@ -34,7 +34,7 @@ namespace Kitenest.Controllers
             }
 
             var city = await _context.City
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (city == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace Kitenest.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,Name")] City city)
+        public async Task<IActionResult> Create([Bind("Id,Name")] City city)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace Kitenest.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,Name")] City city)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] City city)
         {
-            if (id != city.id)
+            if (id != city.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace Kitenest.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CityExists(city.id))
+                    if (!CityExists(city.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace Kitenest.Controllers
             }
 
             var city = await _context.City
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (city == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace Kitenest.Controllers
 
         private bool CityExists(int id)
         {
-            return _context.City.Any(e => e.id == id);
+            return _context.City.Any(e => e.Id == id);
         }
     }
 }

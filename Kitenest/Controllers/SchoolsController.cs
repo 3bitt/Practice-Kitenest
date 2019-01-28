@@ -7,6 +7,7 @@ using Kitenest.Data;
 using Kitenest.Models;
 using Kitenest.Models.Interfaces;
 using System.Collections.Generic;
+using Kitenest.Validators;
 
 namespace Kitenest.Controllers
 {
@@ -25,7 +26,7 @@ namespace Kitenest.Controllers
         // GET: Schools
         public async Task<IActionResult> Index()
         {
-            var kitenestDbContext = _context.School.Include(s => s.City).Include(s => s.Continent).Include(s => s.Country);
+            var kitenestDbContext = _context.School.Include(s => s.City).Include(s => s.Continent);
             return View(await kitenestDbContext.ToListAsync());
         }
 
@@ -40,7 +41,6 @@ namespace Kitenest.Controllers
             var school = await _context.School
                 .Include(s => s.City)
                 .Include(s => s.Continent)
-                .Include(s => s.Country)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (school == null)
             {
@@ -53,11 +53,10 @@ namespace Kitenest.Controllers
         // GET: Schools/Create
         public IActionResult Create()
         {
-            //ViewData["City_id"] = new SelectList(_context.City, "Name", "id");
-            //ViewData["Continent_id"] = new SelectList(_context.Continent, "Name", "id");
-            ViewBag.Continents = new SelectList(_context.Continent.ToList(), "id", "name");
-            //ViewData["Country_id"] = new SelectList(_context.Country, "Name", "Id");
-            //ViewData["School_Time_id"] = new SelectList(_context.SchoolTime, "Name", "id");
+            ViewBag.Continents = new SelectList(_context.Continent.ToList(), "Id", "Name");
+           // ViewBag.Countries = new SelectList(_context.Country.ToList(), "Id", "Name");
+            ViewBag.Cities = new SelectList(_context.City.ToList(), "Id", "Name");
+
             return View();
         }
 
@@ -66,19 +65,32 @@ namespace Kitenest.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Mobile,Continent_id,Country,City")] School school)
+        public async Task<IActionResult> Create([Bind("Id,Name,Mobile,Continent_id,Country,City_id")] School school)
         {
-            if (ModelState.IsValid)
+
+            //var countries = _context.Country.Where(e => e.Name.Equals(school.Country));
+
+            //var cities = _context.City.Where(e => e.Name.Equals(school.City));
+
+            //var country_id = _context.Country
+            //    .Where(e => e.Name == school.Country.ToString())
+            //    .Select(e => e.Id);
+
+            //var city_id = _context.City
+            //    .Where(e => e.Name == school.Country.ToString())
+            //    .Select(e => e.Id);            
+            
+            if (ModelState.IsValid )
             {
                 _context.Add(school);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Admin", "Home");
             }
             //ViewData["City_id"] = new SelectList(_context.City, "id", "id", school.City_id);
-            ViewData["Continent_id"] = new SelectList(_context.Continent, "id", "id", school.Continent_id);
-            //ViewData["Country_id"] = new SelectList(_context.Country, "Id", "Id", school.Country_id);
-            //ViewData["School_Time_id"] = new SelectList(_context.SchoolTime, "id", "id", school.School_Time_id);
-            return View(school);
+            ViewBag.Continents = new SelectList(_context.Continent.ToList(), "Id", "Name");
+            //ViewBag.Countries = new SelectList(_context.Country.ToList(), "Id", "Name");
+            ViewBag.Cities = new SelectList(_context.City.ToList(), "Id", "Name");
+            return View();
         }
 
         // GET: Schools/Edit/5
@@ -94,10 +106,11 @@ namespace Kitenest.Controllers
             {
                 return NotFound();
             }
-            //ViewData["City_id"] = new SelectList(_context.City, "id", "id", school.City_id);
-            ViewData["Continent_id"] = new SelectList(_context.Continent, "id", "id", school.Continent_id);
-           // ViewData["Country_id"] = new SelectList(_context.Country, "Id", "Id", school.Country_id);
-            //ViewData["School_Time_id"] = new SelectList(_context.SchoolTime, "id", "id", school.School_Time_id);
+
+            
+            ViewBag.Continents = new SelectList(_context.Continent.ToList(), "Id", "Name");
+            ViewBag.Cities = new SelectList(_context.City.ToList(), "Id", "Name");
+            
             return View(school);
         }
 
@@ -106,7 +119,7 @@ namespace Kitenest.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Mobile,Continent_id,Country,City")] School school)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Mobile,Continent_id,Country,City_id")] School school)
         {
             if (id != school.Id)
             {
@@ -133,9 +146,9 @@ namespace Kitenest.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["City_id"] = new SelectList(_context.City, "id", "id", school.City_id);
-            ViewData["Continent_id"] = new SelectList(_context.Continent, "id", "id", school.Continent_id);
-            //ViewData["Country_id"] = new SelectList(_context.Country, "Id", "Id", school.Country);
+
+            ViewBag.Continents = new SelectList(_context.Continent.ToList(), "Id", "Name");
+            ViewBag.Cities = new SelectList(_context.City.ToList(), "Id", "Name");
             return View(school);
         }
 
@@ -150,7 +163,6 @@ namespace Kitenest.Controllers
             var school = await _context.School
                 .Include(s => s.City)
                 .Include(s => s.Continent)
-                .Include(s => s.Country)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (school == null)
             {
@@ -184,19 +196,29 @@ namespace Kitenest.Controllers
 
             var query = _context.School
                 .Include(e => e.City)
-                .Include(e => e.Country)
                 .Include(e => e.Continent);
 
             var resultQuery = query.Where(e =>
                 ((string.IsNullOrEmpty(schoolName) ? e.Id > 0 : e.Name.Contains(schoolName)) &&
-                (string.IsNullOrEmpty(continent) ? e.Id > 0 : e.Continent.name.Contains(continent)))
+                (string.IsNullOrEmpty(continent) ? e.Id > 0 : e.Continent.Name.Contains(continent)) &&
+                (string.IsNullOrEmpty(city) ? e.Id > 0 : e.City.Name.Contains(city)) &&
+                (string.IsNullOrEmpty(country) ? e.Id > 0 : e.Country.Contains(country)))
                 ).ToList<School>();
-
-
-
 
             return View(resultQuery);
       
         }
+
+        //public async Task<IActionResult> ValidateCountry(string country)
+
+        //{
+        //    var countries = _context.Country.Where(e => e.Name == country);
+
+        //    if (countries != null)
+        //    {
+        //        return 
+        //    }
+
+        //}
     }
 }

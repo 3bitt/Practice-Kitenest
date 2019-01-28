@@ -3,6 +3,7 @@
 @model WorldViewModel
 
 @{
+    
 }
 
 <body>
@@ -12,36 +13,34 @@
             <a asp-action="Create" asp-controller="Continents">Create New</a>
 
         </p>
-
         @Html.Partial("~/Views/Admin/_ContinentsPartial.cshtml", Model.Continents.ToList())
-
     </div>
+
     <div class="col-md-4">
         <h3>Countries</h3>
         <p>
             <a asp-action="Create" asp-controller="Countries">Create New</a>
         </p>
         @Html.Partial("~/Views/Admin/_CountriesPartial.cshtml", Model.Countries.ToList())
-
-
     </div>
+
     <div class="col-md-4">
         <h3>Cities</h3>
         <p>
             <a asp-action="Create" asp-controller="Cities">Create New</a>
         </p>
         @Html.Partial("~/Views/Admin/_CitiesPartial.cshtml", Model.Cities.ToList())
+    </div>
 
+    <div class="row">
+    <div class="col-md-8">
+        <h3>Schools</h3>
+        
+        <p>
+            <a asp-action="Create" asp-controller="Schools">Create New</a>
+        </p>
+        @Html.Partial("~/Views/Admin/_SchoolsPartial.cshtml", Model.Schools.ToList())
 
     </div>
-    <div class="row">
-        <div class="col-md-8">
-            <h3>Cities</h3>
-            <p>
-                <a asp-action="Create" asp-controller="Schools">Create New</a>
-            </p>
-            @Html.Partial("~/Views/Admin/_SchoolsPartial.cshtml", Model.Schools.ToList())
-
-        </div>
     </div>
 </body>
