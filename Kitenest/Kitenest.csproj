@@ -8,21 +8,43 @@
   <ItemGroup>
     <Compile Remove="Models\AccountViewModels\**" />
     <Compile Remove="Models\ManageViewModels\**" />
-    <Compile Remove="Views\Manage\**" />
     <Content Remove="Models\AccountViewModels\**" />
     <Content Remove="Models\ManageViewModels\**" />
-    <Content Remove="Views\Manage\**" />
     <EmbeddedResource Remove="Models\AccountViewModels\**" />
     <EmbeddedResource Remove="Models\ManageViewModels\**" />
-    <EmbeddedResource Remove="Views\Manage\**" />
     <None Remove="Models\AccountViewModels\**" />
     <None Remove="Models\ManageViewModels\**" />
-    <None Remove="Views\Manage\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\AccountController.cs" />
-    <Compile Remove="Controllers\ManageController.cs" />
+    <Compile Remove="Data\KitenestDbContext.cs" />
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190116224511_Initial.cs" />
+    <Compile Remove="Data\Migrations\20190116224511_Initial.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190117190617_merge.cs" />
+    <Compile Remove="Data\Migrations\20190117190617_merge.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190117193146_restore.cs" />
+    <Compile Remove="Data\Migrations\20190117193146_restore.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190117193236_gh.cs" />
+    <Compile Remove="Data\Migrations\20190117193236_gh.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190119104907_DBprob.cs" />
+    <Compile Remove="Data\Migrations\20190119104907_DBprob.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190128160032_AddUsersAfterModelRestructure.cs" />
+    <Compile Remove="Data\Migrations\20190128160032_AddUsersAfterModelRestructure.Designer.cs" />
+    <Compile Remove="Data\Migrations\ApplicationDbContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\20190128193410_removeCountryFK.cs" />
+    <Compile Remove="Migrations\20190128193410_removeCountryFK.Designer.cs" />
+    <Compile Remove="Migrations\20190128193822_correctCountryFieldInSchooltoString.cs" />
+    <Compile Remove="Migrations\20190128193822_correctCountryFieldInSchooltoString.Designer.cs" />
+    <Compile Remove="Migrations\20190128221027_addEnumerableToSchool.cs" />
+    <Compile Remove="Migrations\20190128221027_addEnumerableToSchool.Designer.cs" />
+    <Compile Remove="Migrations\20190129184951_dbTransform.cs" />
+    <Compile Remove="Migrations\20190129184951_dbTransform.Designer.cs" />
+    <Compile Remove="Migrations\20190129190011_dbTransform2.cs" />
+    <Compile Remove="Migrations\20190129190011_dbTransform2.Designer.cs" />
+    <Compile Remove="ViewModels\AccountViewModel.cs" />
+    <Compile Remove="ViewModels\ManageViewModel.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,6 +70,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,6 +78,20 @@
     <None Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Search.cshtml" />
+    <None Include="Views\Manage\ChangePassword.cshtml" />
+    <None Include="Views\Manage\Disable2fa.cshtml" />
+    <None Include="Views\Manage\EnableAuthenticator.cshtml" />
+    <None Include="Views\Manage\ExternalLogins.cshtml" />
+    <None Include="Views\Manage\GenerateRecoveryCodes.cshtml" />
+    <None Include="Views\Manage\Index.cshtml" />
+    <None Include="Views\Manage\ResetAuthenticator.cshtml" />
+    <None Include="Views\Manage\SetPassword.cshtml" />
+    <None Include="Views\Manage\ShowRecoveryCodes.cshtml" />
+    <None Include="Views\Manage\TwoFactorAuthentication.cshtml" />
+    <None Include="Views\Manage\_Layout.cshtml" />
+    <None Include="Views\Manage\_ManageNav.cshtml" />
+    <None Include="Views\Manage\_StatusMessage.cshtml" />
+    <None Include="Views\Manage\_ViewImports.cshtml" />
     <None Include="Views\Schools\Create.cshtml" />
     <None Include="Views\Schools\Delete.cshtml" />
     <None Include="Views\Schools\Details.cshtml" />

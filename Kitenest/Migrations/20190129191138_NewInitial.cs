@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Kitenest.Data.Migrations
+namespace Kitenest.Migrations
 {
-    public partial class Initial : Migration
+    public partial class NewInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

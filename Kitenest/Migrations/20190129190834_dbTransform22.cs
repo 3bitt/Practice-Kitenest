@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Kitenest.Data.Migrations
+namespace Kitenest.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class dbTransform22 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,6 +45,61 @@ namespace Kitenest.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "City",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_City", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Continent",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Continent", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Country",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Country", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SchoolTime",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    openHour = table.Column<DateTime>(nullable: false),
+                    closeHour = table.Column<DateTime>(nullable: false),
+                    workingFrom = table.Column<DateTime>(nullable: false),
+                    workingTo = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SchoolTime", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -93,8 +148,8 @@ namespace Kitenest.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -138,8 +193,8 @@ namespace Kitenest.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -151,6 +206,42 @@ namespace Kitenest.Data.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "School",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 70, nullable: false),
+                    Mobile = table.Column<int>(nullable: false),
+                    Continent_id = table.Column<int>(nullable: false),
+                    Country = table.Column<string>(nullable: true),
+                    City_id = table.Column<int>(nullable: false),
+                    SchoolId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_School", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_School_City_City_id",
+                        column: x => x.City_id,
+                        principalTable: "City",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_School_Continent_Continent_id",
+                        column: x => x.Continent_id,
+                        principalTable: "Continent",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_School_School_SchoolId",
+                        column: x => x.SchoolId,
+                        principalTable: "School",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -191,6 +282,21 @@ namespace Kitenest.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_School_City_id",
+                table: "School",
+                column: "City_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_School_Continent_id",
+                table: "School",
+                column: "Continent_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_School_SchoolId",
+                table: "School",
+                column: "SchoolId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -211,10 +317,25 @@ namespace Kitenest.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Country");
+
+            migrationBuilder.DropTable(
+                name: "School");
+
+            migrationBuilder.DropTable(
+                name: "SchoolTime");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "City");
+
+            migrationBuilder.DropTable(
+                name: "Continent");
         }
     }
 }

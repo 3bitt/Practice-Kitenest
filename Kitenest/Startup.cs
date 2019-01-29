@@ -38,16 +38,16 @@ namespace Kitenest
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            //services.AddDbContext<KitenestDbContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDbContext<KitenestDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                                            .AddEntityFrameworkStores<ApplicationDbContext>()
+                                            .AddEntityFrameworkStores<KitenestDbContext>()
                                             .AddDefaultTokenProviders();
 
             IServiceProvider serviceProvider = services.BuildServiceProvider();

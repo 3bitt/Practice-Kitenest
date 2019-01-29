@@ -7,13 +7,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Kitenest.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class KitenestDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public KitenestDbContext(DbContextOptions<KitenestDbContext> options)
             : base(options)
         {
 
         }
+        public DbSet<School> School { get; set; }
+        public DbSet<City> City { get; set; }
+        public DbSet<Country> Country { get; set; }
+        public DbSet<Continent> Continent { get; set; }
+        public DbSet<SchoolTime> SchoolTime { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

@@ -11,8 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Kitenest.Models;
-using Kitenest.Models.AccountViewModels;
-using Kitenest.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace Kitenest.Controllers
 {

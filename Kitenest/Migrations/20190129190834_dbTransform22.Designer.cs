@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Kitenest.Data.Migrations
+namespace Kitenest.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190117190617_merge")]
-    partial class merge
+    [DbContext(typeof(KitenestDbContext))]
+    [Migration("20190129190834_dbTransform22")]
+    partial class dbTransform22
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,8 +59,6 @@ namespace Kitenest.Data.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
-                    b.Property<string>("Username");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -72,6 +70,95 @@ namespace Kitenest.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Kitenest.Models.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("City");
+                });
+
+            modelBuilder.Entity("Kitenest.Models.Continent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Continent");
+                });
+
+            modelBuilder.Entity("Kitenest.Models.Country", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Country");
+                });
+
+            modelBuilder.Entity("Kitenest.Models.School", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("City_id");
+
+                    b.Property<int>("Continent_id");
+
+                    b.Property<string>("Country");
+
+                    b.Property<int>("Mobile");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(70);
+
+                    b.Property<int?>("SchoolId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("City_id");
+
+                    b.HasIndex("Continent_id");
+
+                    b.HasIndex("SchoolId");
+
+                    b.ToTable("School");
+                });
+
+            modelBuilder.Entity("Kitenest.Models.SchoolTime", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("closeHour");
+
+                    b.Property<DateTime>("openHour");
+
+                    b.Property<DateTime>("workingFrom");
+
+                    b.Property<DateTime>("workingTo");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SchoolTime");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -182,6 +269,23 @@ namespace Kitenest.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Kitenest.Models.School", b =>
+                {
+                    b.HasOne("Kitenest.Models.City", "City")
+                        .WithMany()
+                        .HasForeignKey("City_id")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Kitenest.Models.Continent", "Continent")
+                        .WithMany()
+                        .HasForeignKey("Continent_id")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Kitenest.Models.School")
+                        .WithMany("getSchools")
+                        .HasForeignKey("SchoolId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
