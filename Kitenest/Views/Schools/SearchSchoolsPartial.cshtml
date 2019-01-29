@@ -1,0 +1,105 @@
+﻿@using Kitenest.Models
+@model IEnumerable<School>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Search Results";
+
+    var itemNmb = 1;
+
+}
+
+        <table class="table table-condensed" style="border-collapse:collapse;">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Continent)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Country)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.City)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    var itemId = ("item" + $"{itemNmb.ToString()}");
+                    var itemIdHash = ("#item" + $"{itemNmb.ToString()}");
+
+
+                    <tr data-toggle="collapse" data-target=@itemIdHash class="accordion-toggle">
+                        <td>
+                            @itemNmb
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Continent.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Country)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.City.Name)
+                        </td>
+                        @*
+                            <td class="text-error"></td>
+                            <td class="text-success">$150.00</td>
+                        *@
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="hiddenRow">
+                            <div class="accordian-body collapse" id=@itemId>
+                                # - @itemNmb
+                                Name - @Html.DisplayFor(modelItem => item.Name)
+                                Continent - @Html.DisplayFor(modelItem => item.Continent.Name)
+                                Country - @Html.DisplayFor(modelItem => item.Country)
+                                City - @Html.DisplayFor(modelItem => item.City.Name)
+                            </div>
+                        </td>
+                    </tr>
+
+                    @(itemNmb++)
+
+                    @*
+                        <tr data-toggle="collapse" data-target="#demo2" class="accordion-toggle">
+                            <td>@itemNmb</td>
+                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Continent.Name)</td>
+                            <td class="text-success">@Html.DisplayFor(modelItem => item.Country)</td>
+                            <td class="text-error">@Html.DisplayFor(modelItem => item.City.Name)</td>
+                            <td class="text-success">$161.00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="hiddenRow"><div id="demo2" class="accordian-body collapse">Demo2</div></td>
+                        </tr>
+                        <tr data-toggle="collapse" data-target="#demo3" class="accordion-toggle">
+                            <td>3</td>
+                            <td>05 May 2013</td>
+                            <td>Credit Account</td>
+                            <td class="text-success">$500.00</td>
+                            <td class="text-error"></td>
+                            <td class="text-success">$661.00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="hiddenRow"><div id="demo3" class="accordian-body collapse">Demo3</div></td>
+                        </tr>
+                    *@
+
+
+
+                }
+
+            </tbody>
+        </table>
+

@@ -54,10 +54,7 @@
     <None Include="Views\Home\About.cshtml" />
     <None Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
-    <None Include="Views\Home\IndexOrig.cshtml" />
-    <None Include="Views\Home\IndexPartial.cshtml" />
     <None Include="Views\Home\Search.cshtml" />
-    <None Include="Views\Home\searchOrigform.cshtml" />
     <None Include="Views\Schools\Create.cshtml" />
     <None Include="Views\Schools\Delete.cshtml" />
     <None Include="Views\Schools\Details.cshtml" />

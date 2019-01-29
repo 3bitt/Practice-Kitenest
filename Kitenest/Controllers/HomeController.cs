@@ -56,20 +56,25 @@ namespace Kitenest.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        [Route("main")]
         public IActionResult Search()
         {
             return View();
-
         }
+
+
         [Route("admin")]
         public IActionResult Admin()
         {
             var continents = _context.Continent;
             var countries = _context.Country;
             var cities = _context.City;
-            var schools = _context.School;
+            var schools = _context.School
+                .Include(s => s.City)
+                .Include(s => s.Continent);
 
-            
+
+
             WorldViewModel result = new WorldViewModel();
             result.Continents = continents;
             result.Countries = countries;

@@ -118,7 +118,8 @@ namespace Kitenest
                 routes.MapRoute("search", "{controller=Schools}/{action=SearchSchools}");
                 routes.MapRoute("create", "{controller=Schools}/{action=Create}");
                 routes.MapRoute("admin", "{controller=Home}/{action=Admin}");
-                
+                routes.MapRoute("main", "{controller=Home}/{action=Search}");
+
             });
 
             

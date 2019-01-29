@@ -23,27 +23,28 @@ namespace Kitenest.Models
         public int Mobile { get; set; }
 
 
+        [Required]
         [Display(Name = "Continent")]
         public int Continent_id { get; set; }
 
         [ForeignKey("Continent_id")]
         public virtual Continent Continent { get; set; }
-
-        //[Required]
+        
         [CountryValidator]
         [Display(Name = "Country")]
         public string Country { get; set; }
 
        
-        
+        [Required]
         [Display(Name = "City")]
         public int City_id { get; set; }
 
         [ForeignKey("City_id")]
         public virtual City City { get; set; }
 
-       // public IEnumerable<School> getSchools { get; set; } 
-        
+
+        public IEnumerable<School> getSchools { get; set; }
+
 
     }
 }
