@@ -8,6 +8,8 @@ using Kitenest.Models;
 using Kitenest.Models.Interfaces;
 using System.Collections.Generic;
 using Kitenest.Validators;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 
 namespace Kitenest.Controllers
 {
@@ -203,22 +205,11 @@ namespace Kitenest.Controllers
                 (string.IsNullOrEmpty(continent) ? e.Id > 0 : e.Continent.Name.Contains(continent)) &&
                 (string.IsNullOrEmpty(city) ? e.Id > 0 : e.City.Name.Contains(city)) &&
                 (string.IsNullOrEmpty(country) ? e.Id > 0 : e.Country.Contains(country)))
-                ).ToList<School>();
+                ).ToList<School>();            
+
 
             return View(resultQuery);
       
         }
-
-        //public async Task<IActionResult> ValidateCountry(string country)
-
-        //{
-        //    var countries = _context.Country.Where(e => e.Name == country);
-
-        //    if (countries != null)
-        //    {
-        //        return 
-        //    }
-
-        //}
     }
 }
