@@ -10,7 +10,7 @@ namespace Kitenest.Areas.Identity.Pages.Account
     {
         public void OnGet()
         {
-
+            
         }
     }
 }

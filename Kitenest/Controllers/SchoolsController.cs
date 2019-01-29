@@ -10,9 +10,11 @@ using System.Collections.Generic;
 using Kitenest.Validators;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Kitenest.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class SchoolsController : Controller
     {
         private readonly KitenestDbContext _context;
@@ -22,8 +24,8 @@ namespace Kitenest.Controllers
             _context = context;
         }
 
-       // private ISchoolService _school;
-        
+        // private ISchoolService _school;
+
 
         // GET: Schools
         public async Task<IActionResult> Index()
@@ -53,6 +55,7 @@ namespace Kitenest.Controllers
         }
 
         // GET: Schools/Create
+
         public IActionResult Create()
         {
             ViewBag.Continents = new SelectList(_context.Continent.ToList(), "Id", "Name");
@@ -191,6 +194,7 @@ namespace Kitenest.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> SearchSchools(string schoolName, string continent, string country,
             string city)
         {

@@ -14,7 +14,7 @@ using Kitenest.ViewModels;
 
 namespace Kitenest.Controllers
 {
-    
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly KitenestDbContext _context;
@@ -30,7 +30,6 @@ namespace Kitenest.Controllers
            
             return View();
         }
-        [Authorize(Roles = "Admin")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -64,6 +63,7 @@ namespace Kitenest.Controllers
 
 
         [Route("admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Admin()
         {
             var continents = _context.Continent;
@@ -72,8 +72,6 @@ namespace Kitenest.Controllers
             var schools = _context.School
                 .Include(s => s.City)
                 .Include(s => s.Continent);
-
-
 
             WorldViewModel result = new WorldViewModel();
             result.Continents = continents;
@@ -84,12 +82,6 @@ namespace Kitenest.Controllers
             return View(result);
             
         }
-        //[HttpGet]
-        //public IActionResult Search(String name) //String Continent, String Country, String City
-        //{
-         
-
-        //    return View();
-        //}
+        
     }
 }

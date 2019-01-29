@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Kitenest.Data;
 using Kitenest.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Kitenest.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ContinentsController : Controller
     {
         private readonly KitenestDbContext _context;
