@@ -20,17 +20,15 @@ namespace Kitenest.Areas.Identity.Pages.Account.Manage
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
-            IEmailSender emailSender)
+            SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _emailSender = emailSender;
         }
 
         public string Username { get; set; }
 
-        public bool IsEmailConfirmed { get; set; }
+       // public bool IsEmailConfirmed { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -60,6 +58,7 @@ namespace Kitenest.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var email = await _userManager.GetEmailAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            
 
             Username = userName;
 
@@ -69,8 +68,9 @@ namespace Kitenest.Areas.Identity.Pages.Account.Manage
                 PhoneNumber = phoneNumber
             };
 
-            IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
+            // IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
 
+            ViewData["user"] = user;
             return Page();
         }
 

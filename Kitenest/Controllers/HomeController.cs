@@ -62,9 +62,9 @@ namespace Kitenest.Controllers
         }
 
 
-        [Route("admin")]
+        //[Route("admin")]
         [Authorize(Roles = "Admin")]
-        public IActionResult Admin()
+        public async Task<IActionResult> Admin()
         {
             var continents = _context.Continent;
             var countries = _context.Country;
