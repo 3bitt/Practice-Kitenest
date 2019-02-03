@@ -66,6 +66,7 @@ namespace Kitenest.Controllers
         }
 
         // POST: Schools/Create
+        [HttpPost]
         [ValidateAntiForgeryToken]        
         public async Task<IActionResult> Create([Bind("Id,Name,Mobile,Continent_id,Country,City_id")] School school)
         {               
