@@ -114,15 +114,17 @@ namespace Kitenest
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                routes.MapRoute("search", "{controller=Schools}/{action=SearchSchools}");
-                routes.MapRoute("create", "{controller=Schools}/{action=Create}");
-                //routes.MapRoute("admin", "{controller=Home}/{action=Admin}");
-                routes.MapRoute("main", "{controller=Home}/{action=Search}");
+                routes.MapRoute("default", "{controller=Home}/{action=Index}");
+
+                routes.MapRoute(
+                    name: "kitenest",
+                    template: "Search",
+                    defaults: new { controller = "Schools", action = "SearchSchools" });
 
             });
 
-            
+
+
             CreateRoles(serviceProvider).Wait();
 
         }

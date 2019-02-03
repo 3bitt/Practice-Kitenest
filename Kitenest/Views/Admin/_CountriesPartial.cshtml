@@ -2,14 +2,7 @@
 
 
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                Countries
-            </th>
-            <th></th>
-        </tr>
-    </thead>
+    
     <tbody>
 @foreach (var item in Model) {
         <tr>
@@ -19,7 +12,7 @@
             <td>
                 <a asp-action="Edit" asp-controller="Countries" asp-route-id="@item.Id">Edit</a> |
 
-                <a asp-action="Delete" asp-controller="Countries" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-controller="Countries" asp-route-id="@item.Id" style="color:red">Delete</a>
             </td>
         </tr>
 }

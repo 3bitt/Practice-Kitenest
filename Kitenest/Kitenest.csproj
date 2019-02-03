@@ -51,6 +51,7 @@
     <Compile Remove="Migrations\20190129184951_dbTransform.Designer.cs" />
     <Compile Remove="Migrations\20190129190011_dbTransform2.cs" />
     <Compile Remove="Migrations\20190129190011_dbTransform2.Designer.cs" />
+    <Compile Remove="Views\Admin\Index2.cshtml.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -60,6 +61,7 @@
     <Content Remove="Views\Continents\Index.cshtml" />
     <Content Remove="Views\Countries\Details.cshtml" />
     <Content Remove="Views\Countries\Index.cshtml" />
+    <Content Remove="Views\Home\Search.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -83,7 +85,6 @@
     <None Include="Views\Home\About.cshtml" />
     <None Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
-    <None Include="Views\Home\Search.cshtml" />
     <None Include="Views\Schools\Create.cshtml" />
     <None Include="Views\Schools\Delete.cshtml" />
     <None Include="Views\Schools\Details.cshtml" />
@@ -97,6 +98,9 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Home\Admin.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Schools\Search.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="wwwroot\css\site.css">

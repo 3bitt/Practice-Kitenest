@@ -11,12 +11,15 @@ using Kitenest.Validators;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using Kitenest.ViewModels;
 
 namespace Kitenest.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
+    [AllowAnonymous]
     public class SchoolsController : Controller
     {
+        public int pageSize = 3;
         private readonly KitenestDbContext _context;
 
         public SchoolsController(KitenestDbContext context)
@@ -89,7 +92,7 @@ namespace Kitenest.Controllers
             {
                 _context.Add(school);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Admin", "Home");
+                return RedirectToAction("manageSchools", "Admin");
             }
             //ViewData["City_id"] = new SelectList(_context.City, "id", "id", school.City_id);
             ViewBag.Continents = new SelectList(_context.Continent.ToList(), "Id", "Name");
@@ -185,7 +188,7 @@ namespace Kitenest.Controllers
             var school = await _context.School.FindAsync(id);
             _context.School.Remove(school);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("manageSchools", "Admin");
         }
 
         private bool SchoolExists(int id)
@@ -193,12 +196,20 @@ namespace Kitenest.Controllers
             return _context.School.Any(e => e.Id == id);
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> SearchSchools(string schoolName, string continent, string country,
-            string city)
+
+        public IActionResult Search()
         {
-            
+            return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous] 
+        [Route("Search")]
+        public async Task<IActionResult> SearchSchools(string schoolName, string continent, string country,
+            string city, [FromQuery]int page = 1)
+        {
+
+            SchoolsViewModel schoolsList = new SchoolsViewModel();
 
             var query = _context.School
                 .Include(e => e.City)
@@ -208,11 +219,20 @@ namespace Kitenest.Controllers
                 ((string.IsNullOrEmpty(schoolName) ? e.Id > 0 : e.Name.Contains(schoolName)) &&
                 (string.IsNullOrEmpty(continent) ? e.Id > 0 : e.Continent.Name.Contains(continent)) &&
                 (string.IsNullOrEmpty(city) ? e.Id > 0 : e.City.Name.Contains(city)) &&
-                (string.IsNullOrEmpty(country) ? e.Id > 0 : e.Country.Contains(country)))
-                ).ToList<School>();            
+                (string.IsNullOrEmpty(country) ? e.Id > 0 : e.Country.Contains(country))) )
+                .ToList();
+
+            var limitedResult = resultQuery
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
 
 
-            return View(resultQuery);
+
+            schoolsList.Schools = limitedResult;
+            schoolsList.CurrentPage = page;
+            schoolsList.TotalPages = (resultQuery.Count() / pageSize);
+
+            return View(schoolsList);
       
         }
     }

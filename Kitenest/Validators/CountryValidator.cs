@@ -24,25 +24,15 @@ namespace Kitenest.Validators
                          .GetService(typeof(KitenestDbContext));
 
             var checkIfExists = service.Country.Where(e => e.Name == value.ToString());
-            
 
-            // Validator to be edited becouse of models change
-
-            //if (String.IsNullOrEmpty(school.Country) || String.IsNullOrWhiteSpace(school.Country))
-            //{
-            //    return new ValidationResult(GetErrorMessage(1, school));
-            //}
 
             if (!checkIfExists.Any())
             {
                 return new ValidationResult(GetErrorMessage(3, school));
             }
 
-
             return ValidationResult.Success;
         }
-
-
 
         private string GetErrorMessage(int caseId, School school)
         {

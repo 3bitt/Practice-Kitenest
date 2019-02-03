@@ -14,7 +14,7 @@ using Kitenest.ViewModels;
 
 namespace Kitenest.Controllers
 {
-    [AllowAnonymous]
+    
     public class HomeController : Controller
     {
         private readonly KitenestDbContext _context;
@@ -37,6 +37,7 @@ namespace Kitenest.Controllers
             return View();
         }
 
+        [Authorize(Roles ="Admin")]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
@@ -55,7 +56,7 @@ namespace Kitenest.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [Route("main")]
+        //[Route("main")]
         public IActionResult Search()
         {
             return View();

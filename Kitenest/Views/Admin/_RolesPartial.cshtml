@@ -1,4 +1,4 @@
-﻿@page
+﻿
 
 
 
@@ -13,8 +13,8 @@
                     <strong>@role.Text </strong>
                 </td>
                 <td class="col-sm-1 col-lg-2 col-md-2">
-                    <span onclick="return confirm('Czy na pewno chcesz usunąć rolę?')"><a href="/Roles/Delete?RoleName=@role.Text" class="delLink" style="color:red;">Usuń</a></span> |
-                    @Html.ActionLink("Edytuj", "Edit", new { roleName = @role.Text })
+                    <span onclick="return confirm('Do you really want to delete that role ?')"><a href="/Roles/Delete?RoleName=@role.Text" class="delLink" style="color:red;">Delete</a></span> |
+                    @Html.ActionLink("Edit", "Edit", new { roleName = @role.Text })
                 </td>
             </tr>
         }

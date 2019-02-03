@@ -62,7 +62,7 @@ namespace Kitenest.Controllers
             {
                 _context.Add(country);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Admin", "Home");
+                return RedirectToAction("manageSchools", "Admin");
             }
             return View(country);
         }
@@ -113,7 +113,7 @@ namespace Kitenest.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Admin", "Home");
+                return RedirectToAction("manageSchools", "Admin");
             }
             return View(country);
         }
@@ -144,7 +144,7 @@ namespace Kitenest.Controllers
             var country = await _context.Country.FindAsync(id);
             _context.Country.Remove(country);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Admin", "Home");
+            return RedirectToAction("manageSchools", "Admin");
         }
 
         private bool CountryExists(int id)

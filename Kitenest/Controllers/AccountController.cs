@@ -6,6 +6,7 @@ using Kitenest.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Kitenest.Models;
 
 namespace Kitenest.Controllers
 {

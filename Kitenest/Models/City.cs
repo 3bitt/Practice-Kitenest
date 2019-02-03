@@ -10,11 +10,5 @@ namespace Kitenest.Models
 
         public int Id { get; set; }
         public string Name { get; set; }
-
-        // public virtual Country Country { get; set; }
-
-        //public virtual IEnumerable<School> Schools { get; set; }
-
-        //public IEnumerable<Country> getCountries { get; set; }
     }
 }

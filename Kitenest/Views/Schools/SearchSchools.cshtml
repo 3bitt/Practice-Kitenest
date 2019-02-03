@@ -1,149 +1,141 @@
-﻿@model IEnumerable<School>
+﻿@using Kitenest.ViewModels
+@model SchoolsViewModel
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
     ViewBag.Title = "Search Results";
     var itemNmb = 1;
+    //School Schools = SchoolsViewModel;
 }
 
 <head>
     <link href="~/css/custom/search-searchForm.css" rel="stylesheet">
 </head>
-<h2>Search for kite schools</h2>
-<div class="panel panel-primary">
-    <div class="panel-heading">Customize your search</div>
-    <div class="panel-body">
+<body>
+    <h2>Search for kite schools</h2>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Customize your search</div>
+        <div class="panel-body">
 
-        <form asp-controller="Schools" asp-action="SearchSchools" method="GET">
-            <div class="col-md-6">
+            <form asp-controller="Schools" asp-action="SearchSchools" method="GET">
+                <div class="col-md-6">
 
-                <div class="input-group">
-                    <span class="input-group-addon" id="schoolName"><b>School name</b></span>
-                    <input type="text" class="form-control" name="schoolName" aria-describedby="basic-addon1">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="schoolName"><b>School name</b></span>
+                        <input type="text" class="form-control" name="schoolName" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="continent"><b>Continent</b></span>
+                        <input type="text" class="form-control" name="continent" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="country"><b>Country</b></span>
+                        <input type="text" class="form-control" name="country" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="city"><b>City</b></span>
+                        <input type="text" class="form-control" name="city" aria-describedby="basic-addon1">
+                    </div>
                 </div>
-                <div class="input-group">
-                    <span class="input-group-addon" id="continent"><b>Continent</b></span>
-                    <input type="text" class="form-control" name="continent" aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon" id="country"><b>Country</b></span>
-                    <input type="text" class="form-control" name="country" aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon" id="city"><b>City</b></span>
-                    <input type="text" class="form-control" name="city" aria-describedby="basic-addon1">
-                </div>
-            </div>
 
-            <span id="helpBlock" class="help-block">During winter season school might be closed</span>
-            <span class="input-group-btn">
-                <button class="btn btn-default search-button" type="submit">
-                    <i class="glyphicon glyphicon-search"></i> Search
-                </button>
-            </span>
-        </form>
+                <span id="helpBlock" class="help-block">During winter season school might be closed</span>
+                <span class="input-group-btn">
+                    <button class="btn btn-default search-button" type="submit">
+                        <i class="glyphicon glyphicon-search"></i> Search
+                    </button>
+                </span>
+            </form>
 
+        </div>
     </div>
-</div>
 
 
 
-@*------------------------------ Drop Down Table with details --------------------*@
+    @*------------------------------ Drop Down Table with details --------------------*@
 
-@{ if (Model.Any()) { 
-    <table class="table table-condensed" style="border-collapse:collapse;">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Continent)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Country)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.City)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (var item in Model)
-            {
-                var itemId = ("item" + $"{itemNmb.ToString()}");
-                var itemIdHash = ("#item" + $"{itemNmb.ToString()}");
-
-
-                <tr data-toggle="collapse" data-target=@itemIdHash class="accordion-toggle">
-                    <td>
-                        @itemNmb
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Continent.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Country)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.City.Name)
-                    </td>
-                    @*
-                        <td class="text-error"></td>
-                        <td class="text-success">$150.00</td>
-                    *@
-                </tr>
-                <tr>
-                    <td colspan="6" class="hiddenRow">
-                        <div class="accordian-body collapse" id=@itemId>
-                            # - @itemNmb<br />
-                            Name - @Html.DisplayFor(modelItem => item.Name)<br />
-                            Continent - @Html.DisplayFor(modelItem => item.Continent.Name)<br />
-                            Country - @Html.DisplayFor(modelItem => item.Country)<br />
-                            City - @Html.DisplayFor(modelItem => item.City.Name)<br />
-                        </div>
-                    </td>
-                </tr>
-
-                @(itemNmb++)
-
-                @*
-                    <tr data-toggle="collapse" data-target="#demo2" class="accordion-toggle">
-                        <td>@itemNmb</td>
-                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Continent.Name)</td>
-                        <td class="text-success">@Html.DisplayFor(modelItem => item.Country)</td>
-                        <td class="text-error">@Html.DisplayFor(modelItem => item.City.Name)</td>
-                        <td class="text-success">$161.00</td>
-                    </tr>
+    @{ if (Model.Schools.Any())
+        {
+            
+            <table class="table table-condensed" style="border-collapse:collapse;">
+                <thead>
                     <tr>
-                        <td colspan="6" class="hiddenRow"><div id="demo2" class="accordian-body collapse">Demo2</div></td>
+                        <th>#</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Schools)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Continent)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Country)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.City)
+                        </th>
                     </tr>
-                    <tr data-toggle="collapse" data-target="#demo3" class="accordion-toggle">
-                        <td>3</td>
-                        <td>05 May 2013</td>
-                        <td>Credit Account</td>
-                        <td class="text-success">$500.00</td>
-                        <td class="text-error"></td>
-                        <td class="text-success">$661.00</td>
-                    </tr>
-                    <tr>
-                        <td colspan="6" class="hiddenRow"><div id="demo3" class="accordian-body collapse">Demo3</div></td>
-                    </tr>
-                *@
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.Schools)
+                    {
+                        var itemId = ("item" + $"{itemNmb.ToString()}");
+                        var itemIdHash = ("#item" + $"{itemNmb.ToString()}");
 
 
+                        <tr data-toggle="collapse" data-target=@itemIdHash class="accordion-toggle">
+                            <td>
+                                @itemNmb
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Continent.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Country)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.City.Name)
+                            </td>
+                            @*
+                                <td class="text-error"></td>
+                                <td class="text-success">$150.00</td>
+                            *@
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="hiddenRow">
+                                <div class="accordian-body collapse" id=@itemId>
+                                    # - @itemNmb<br />
+                                    Name - @Html.DisplayFor(modelItem => item.Name)<br />
+                                    Continent - @Html.DisplayFor(modelItem => item.Continent.Name)<br />
+                                    Country - @Html.DisplayFor(modelItem => item.Country)<br />
+                                    City - @Html.DisplayFor(modelItem => item.City.Name)<br />
+                                </div>
+                            </td>
+                        </tr>
 
-            }
+                        @(itemNmb++)
 
-        </tbody>
-    </table>
+                    }
+
+                </tbody>
+            </table>
+        }
+
+        <div class="row">
+            <div class="col-md-6">
+                <pagination current-page="@Model.CurrentPage" , total-pages="@Model.TotalPages"
+                            route-url="@Url.RouteUrl("kitenest",  new {
+                                  schoolName = ViewContext.RouteData.Values["schoolName"],
+                                  continent = ViewContext.RouteData.Values["continent"],
+                                  country = ViewContext.RouteData.Values["country"],
+                                  city = ViewContext.RouteData.Values["city"]})" />
+            </div>
+        </div>
+            
+        
     }
-}
 
+</body>

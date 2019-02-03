@@ -62,7 +62,7 @@ namespace Kitenest.Controllers
             {
                 _context.Add(continent);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Admin", "Home");
+                return RedirectToAction("manageSchools", "Admin");
             }
             return View(continent);
         }
@@ -113,7 +113,7 @@ namespace Kitenest.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Admin", "Home");
+                return RedirectToAction("manageSchools", "Admin");
             }
             return View(continent);
         }
@@ -144,7 +144,7 @@ namespace Kitenest.Controllers
             var continent = await _context.Continent.FindAsync(id);
             _context.Continent.Remove(continent);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Admin", "Home");
+            return RedirectToAction("manageSchools", "Admin");
         }
 
         private bool ContinentExists(int id)
