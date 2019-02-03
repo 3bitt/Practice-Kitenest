@@ -18,7 +18,6 @@ namespace Kitenest.Controllers
     {
 
         private readonly KitenestDbContext _context;
-        //private readonly UserManager<IdentityUser> manager;
 
         public AdminController(KitenestDbContext context)
         {
@@ -55,15 +54,13 @@ namespace Kitenest.Controllers
         public ActionResult manageUsers()
         {           
             
-            // Lista ról
             var rolelistDB = _context.Roles;
             var rolelistSort = (from r in rolelistDB
                                 orderby r.Name
                                 select r);
             var roles = rolelistSort.ToList().Select(r => new SelectListItem { Value = r.Name.ToString(), Text = r.Name }).ToList();
             ViewBag.Roles = roles;
-
-            // Lista użytkowników
+            
             var userlistDB = _context.Users;
             var userlistSort = (from u in userlistDB
                                 orderby u.UserName
@@ -93,7 +90,7 @@ namespace Kitenest.Controllers
                     Name = collection["RoleName"]
                 });
                 _context.SaveChanges();
-                ViewBag.Message = "Pomyślnie utworzono rolę !";
+                ViewBag.Message = "Creation successful";
                 return RedirectToAction("Index");
             }
             catch
@@ -121,8 +118,6 @@ namespace Kitenest.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -167,7 +162,6 @@ namespace Kitenest.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
 
                 return RedirectToAction(nameof(Index));
             }

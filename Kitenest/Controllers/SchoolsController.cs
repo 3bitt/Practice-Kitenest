@@ -19,15 +19,13 @@ namespace Kitenest.Controllers
     [AllowAnonymous]
     public class SchoolsController : Controller
     {
-        public int pageSize = 3;
+        public int pageSize = 10;
         private readonly KitenestDbContext _context;
 
         public SchoolsController(KitenestDbContext context)
         {
             _context = context;
         }
-
-        // private ISchoolService _school;
 
 
         // GET: Schools
@@ -62,31 +60,15 @@ namespace Kitenest.Controllers
         public IActionResult Create()
         {
             ViewBag.Continents = new SelectList(_context.Continent.ToList(), "Id", "Name");
-           // ViewBag.Countries = new SelectList(_context.Country.ToList(), "Id", "Name");
             ViewBag.Cities = new SelectList(_context.City.ToList(), "Id", "Name");
 
             return View();
         }
 
         // POST: Schools/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
         [ValidateAntiForgeryToken]        
         public async Task<IActionResult> Create([Bind("Id,Name,Mobile,Continent_id,Country,City_id")] School school)
-        {
-
-            //var countries = _context.Country.Where(e => e.Name.Equals(school.Country));
-
-            //var cities = _context.City.Where(e => e.Name.Equals(school.City));
-
-            //var country_id = _context.Country
-            //    .Where(e => e.Name == school.Country.ToString())
-            //    .Select(e => e.Id);
-
-            //var city_id = _context.City
-            //    .Where(e => e.Name == school.Country.ToString())
-            //    .Select(e => e.Id);            
+        {               
             
             if (ModelState.IsValid )
             {
@@ -94,9 +76,8 @@ namespace Kitenest.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("manageSchools", "Admin");
             }
-            //ViewData["City_id"] = new SelectList(_context.City, "id", "id", school.City_id);
+
             ViewBag.Continents = new SelectList(_context.Continent.ToList(), "Id", "Name");
-            //ViewBag.Countries = new SelectList(_context.Country.ToList(), "Id", "Name");
             ViewBag.Cities = new SelectList(_context.City.ToList(), "Id", "Name");
             return View();
         }
@@ -123,8 +104,6 @@ namespace Kitenest.Controllers
         }
 
         // POST: Schools/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Mobile,Continent_id,Country,City_id")] School school)

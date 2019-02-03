@@ -34,7 +34,7 @@ namespace Kitenest.TagHelpers
                 }
                 else
                 {
-                    output.Content.AppendHtml($"<a class=\"Page\" href=\"?page={i + 1}&{RouteUrl}\">");
+                    output.Content.AppendHtml($"<a class=\"Page\" href=\"?page={i + 1}\">");  //&{RouteUrl}\">");
                     output.Content.AppendHtml("<span>");
                     output.Content.Append($"{i + 1}");
                     output.Content.AppendHtml("</span>");
@@ -42,7 +42,7 @@ namespace Kitenest.TagHelpers
                 }
             }
 
-            output.PostContent.AppendHtml("</div>");
+            output.PostContent.AppendHtml(@"</div>");
         }
     }
 }
